@@ -1,7 +1,7 @@
 {{#extend "main"}}
   {{#content "body"}}
     <h1>Login</h1>
-    <form action="/auth/login" method="POST">
+    <form action="./routes/api/authRoutes" method="POST">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="password">Password:</label>

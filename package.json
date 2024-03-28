@@ -1,8 +1,8 @@
 {
-    "name": "Blogger2.0",
+    "name": "live-2-blog",
     "version": "1.0.0",
     "description": "Your project description",
-    "main": "app.js",
+    "main": "server.js",
     "scripts": {
       "start": "node app.js"
     },

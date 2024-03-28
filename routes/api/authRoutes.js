@@ -13,8 +13,9 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
+    req.logout(); // Passport method to remove the user's session
+    req.session.destroy(); // Destroy the session data
+    res.redirect('/'); // Redirect to the homepage or any other desired page
+  });
 
 module.exports = router;

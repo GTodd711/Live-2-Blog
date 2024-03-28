@@ -1,6 +1,16 @@
 {{#extend "main"}}
   {{#content "body"}}
-    <h1>Welcome to Your Website</h1>
-    <!-- Add content here -->
+    <h1>Welcome to Your Blog</h1>
+    {{#if posts.length}}
+      <ul>
+        {{#each posts}}
+          <li>
+            <a href="/posts/{{this.id}}">{{this.title}}</a> by {{this.User.username}} on {{this.createdAt}}
+          </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <p>No posts found.</p>
+    {{/if}}
   {{/content}}
 {{/extend}}
