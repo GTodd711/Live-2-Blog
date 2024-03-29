@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated } = require('../middleware/auth');
-const { Post, Comment } = require('../models');
+const { ensureAuthenticated } = require('../../middleware/authMiddleware');
+const { Post, Comment } = require('../../models');
 
 // Render form for creating new post
 router.get('/new', ensureAuthenticated, (req, res) => {

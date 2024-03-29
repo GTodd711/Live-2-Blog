@@ -5,9 +5,9 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const dotenv = require('dotenv');
 const sequelize = require('./config/connection'); // Import your Sequelize instance from connection.js
-const authRoutes = require('./routes/authRoutes'); // Import your authentication routes
-const { User } = require('./models'); // Import your User model
+const authRoutes = require('./routes/api/authRoutes'); // Import your authentication routes
 const routes = require('./routes'); // Import your main routes (index.js)
+const { authMiddleware, validationMiddleware } = require('./middleware');// Import middleware
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -32,14 +32,22 @@ app.use(passport.session());
 // Passport configuration (assuming you have a passport.js file)
 require('./config/passport')(passport);
 
+// Apply middleware to specific routes
+app.use('/auth', authMiddleware);
+app.use(validationMiddleware);
+
 // Routes setup
 app.use('/auth', authRoutes); // Use authRoutes for authentication routes
 app.use(routes); // Use main routes
 
 // Sync Sequelize models with the database and start the server
-sequelize.sync({ force: false }).then(() => {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+sequelize.sync({ force: false }) // Set force to true to drop existing tables and re-create them
+  .then(() => {
+    console.log('Database synchronized successfully.');
+    app.listen(3000, () => {
+      console.log('Server is running on port 3000.');
+    });
+  })
+  .catch((error) => {
+    console.error('Error synchronizing database:', error);
   });
-});

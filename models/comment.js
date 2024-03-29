@@ -1,7 +1,5 @@
-// In models/comment.js
-
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('./db/schema');
 
 const Comment = sequelize.define('Comment', {
   id: {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated, forwardAuthenticated } = require('../middleware/auth');
+const { ensureAuthenticated, forwardAuthenticated } = require('./middleware/authMiddleware');
 const { Post, Comment } = require('../models');
 
 // Homepage route
